@@ -45,4 +45,4 @@ CREATE TABLE EMPLEADOS AS SELECT
     * 
 FROM 
     HR.EMPLOYEES;
--- 5...
+-- 5. Más adelante
