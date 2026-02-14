@@ -7,6 +7,10 @@ Este repositorio contiene las prácticas realizadas en clase, enfocadas en el ma
 
 Contenido
 EjerciciosEnClase.sql -> Archivo principal que reúne los ejercicios desarrollados en clase.
+NoSQL 
+Proyecto
+SQL
+PL -> SQL 
 
 Objetivo
 Mantener un registro organizado de los avances académicos en la asignatura, facilitando la revisión, práctica y seguimiento del aprendizaje.
