@@ -1,3 +1,6 @@
+-- Se escribe esto para poder ver la respuesta del codigo en la consola
+SET SERVEROUTPUT ON;
+
 -- PRIMER HOLA MUNDO
 -- Manera uno:
 DECLARE
@@ -14,6 +17,7 @@ BEGIN
 	dbms_output.put_line(vv_miPrimeraVariable);
 END;
 /
+-------------------------------------------------------------------------------------------------------------------------------------------------
 -- Como llamar un dato de una base de datos y mostrarlo como informacion
 DECLARE
     vv_nombre VARCHAR2(50) ; --> Variables
@@ -34,6 +38,7 @@ dbms_output.put_line('El nombre del empleado es: ' --> Esto es un literal
                      || vv_apellido);
 end;
 /
+-------------------------------------------------------------------------------------------------------------------------------------------------
 -- Como tener una variable "universal" em PLSQL
 DECLARE
     vv_nombre   HR.EMPLOYEES.FIRST_NAME%TYPE; --> El %TYPE pone el tipo de dato universal
@@ -55,6 +60,7 @@ dbms_output.put_line('El nombre del empleado es: '
                      || vv_apellido );
         end;
 /
+-------------------------------------------------------------------------------------------------------------------------------------------------
 -- Como llamar toda la info de las columnas
 DECLARE
     vv_empleado HR.EMPLOYEES%ROWTYPE; --> Se usa ROWTYPE para llamar todas las columnas
@@ -72,7 +78,7 @@ dbms_output.put_line('El nombre del empleado es: '
                      || vv_empleado.FIRST_NAME); --> Si quiero llamar un dato especifico de la base
         end;
 /
-
+-------------------------------------------------------------------------------------------------------------------------------------------------
 -- Estructuras de control
 -- IF
 DECLARE
@@ -85,6 +91,7 @@ BEGIN
     END IF; 
 END;
 /
+-------------------------------------------------------------------------------------------------------------------------------------------------
 -- GOTO
 DECLARE
     vd_current_date NUMBER := TO_NUMBER(TO_CHAR(SYSDATE, 'DD')); 
@@ -94,7 +101,7 @@ BEGIN
     ELSE 
         GOTO noprimo;
     END IF; 
-
+-------------------------------------------------------------------------------------------------------------------------------------------------
 -- LOOP
  
 DECLARE 
@@ -112,7 +119,7 @@ BEGIN
     END LOOP;
 END;
 /
-
+-------------------------------------------------------------------------------------------------------------------------------------------------
 -- WHILE 
 DECLARE
    a NUMBER := 12;
@@ -140,6 +147,7 @@ BEGIN
    DBMS_OUTPUT.PUT_LINE('El MCM es: ' || mcm);
 END;
 /
+-------------------------------------------------------------------------------------------------------------------------------------------------
 -- FOR
 BEGIN
 FOR X IN REVERSE 1..50 LOOP
@@ -159,3 +167,32 @@ BEGIN
     END LOOP;
 END;
 /
+-------------------------------------------------------------------------------------------------------------------------------------------------
+-- PROCEDIMIENTO ALMACENADO
+SET SERVEROUTPUT ON;
+
+CREATE OR REPLACE PROCEDURE sp_saludo ( --> sp es el proceso almacenado o el nombre del método
+    param_lala IN VARCHAR2
+)
+/*
+Autor: Andres Gonzalez
+Fecha: 23/02/26
+Descripcion: Trabajo en clase
+*/ IS
+    vv_mensaje_final VARCHAR2(100);
+BEGIN
+    vv_mensaje_final := 'hola mundo ' || param_lala; --> || concatena ´´ lo que esta dentro de las comillas simples se llama literales
+    dbms_output.put_line(vv_mensaje_final);
+END;
+/
+
+BEGIN
+    sp_saludo('lala');
+END;
+/ --> salto de linea
+-- Para borrar el procedimiento se hace
+DROP PROCEDURE sp_saludo;
+
+-- CONSULTA PARA CADA ULTIMO VIERNES DE CUALQUIER MES
+SELECT NEXT_DAY(LAST_DAY (SYSDATE)-7, 'VIERNES')  
+FROM DUAL 
