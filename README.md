@@ -1,48 +1,27 @@
-﻿# BasesDeDatos2_2026
- 
-Repositorio creado para documentar y organizar los ejercicios desarrollados en el curso Bases de Datos 2 (2026-1).
+﻿Portafolio de Aprendizaje: Bases de Datos II (2026-1)
 
-Descripción
-Este repositorio contiene las prácticas realizadas en clase, enfocadas en el manejo de bases de datos relacionales, consultas avanzadas en SQL, procedimientos almacenados y otros conceptos fundamentales vistos durante el semestre.
+Este repositorio es un espacio organizado diseñado para documentar el progreso, los talleres prácticos y la evolución de mi aprendizaje a lo largo del semestre. La estructura esta pensada para poder ser revisada y entendida facilmente.
 
-1. PL/SQL (Programación Procedural)
-Esta sección contiene la lógica de servidor, disparadores y procedimientos desarrollados durante el semestre.
+Mi objetivo
+Mantener un registro claro de los avances académicos de la asignatura, facilitando la revisión de los talleres, la práctica constante y el estudio de los conceptos vistos en clase.
 
-EjerciciosEnClase.sql: Archivo principal que reúne los ejercicios prácticos y ejemplos rápidos desarrollados en las sesiones.
+Estructura del Repositorio
 
-Taller PLSQL.sql: Documento con la resolución del taller.
+01_Fundamentos_SQL
+Contenido: Prácticas iniciales del curso enfocadas en la creación de estructuras de tablas, inserción de datos de prueba y diseño de consultas estructuradas para resolver problemas de lógica de negocios.
 
-Bitácora de Clases: Archivos organizados por fecha que contienen el progreso específico de cada sesión:
+02_PLSQL_Basico
+Contenido: Primeros pasos en la programación dentro del motor de la base de datos. Incluye el uso de variables, flujos condicionales, diferentes tipos de ciclos (bucles) y la creación de procedimientos sencillos para automatizar tareas.
 
-Febrero: Clases del 16, 18 y 23 de febrero.
+03_PLSQL_Avanzado
+Contenido: Ejercicios de mayor complejidad enfocados en optimización, medición de rendimiento de consultas, procesamiento de datos en masa y control avanzado de errores en el servidor.
 
-Marzo: Clases del 4 y 9 de marzo.
+04_NoSQL
+Contenido: Introducción y taller práctico dedicado al manejo de bases de datos no relacionales orientadas a documentos.
 
-Retos y Pruebas:
+05_Proyecto_Final
+Contenido: Carpeta destinada a guardar los repositorios donde estan reposados el back y el front del proyecto.
 
-RETO_CLASE_02.sql: Solución al desafío de lógica en clase.
-
-Prueba_clase_1.sql: Primer control práctico.
-
-
-
-2. Scripts SQL
-Scripts generales de administración y consultas estructuradas.
-
-03_template_en...: Plantilla para solución del taller.
-
-SQL.sql: Consultas generales y pruebas de sintaxis DDL/DML.
-
-3. Proyecto Final
-Proyecto: Carpeta contenedora de la información de l proyecto y sus repositorios especificos.
-
-4. NoSQL
-
-
-Objetivo
-Mantener un registro organizado de los avances académicos en la asignatura, facilitando la revisión, práctica y seguimiento del aprendizaje.
-
-Andrés González
-Estudiante de Ingeniería de Sistemas
-Universidad El Bosque
+Andrés González Estudiante de Ingeniería de Sistemas  
+Universidad El Bosque  
 2026-1

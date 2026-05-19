@@ -1,0 +1,303 @@
+/*
+================================================================================
+UNIVERSIDAD EL BOSQUE - FACULTAD DE INGENIERÍA
+Asignatura: Bases de Datos II (2026-1)
+Estudiante: Andrés González
+Componente: Introducción a MongoDB y Operaciones CRUD
+Descripción: Script de práctica orientado al manejo básico de bases de datos NoSQL
+             utilizando MongoDB.
+================================================================================
+*/
+
+-- =============================================================================
+-- BASE DE DATOS: mundial2026
+-- COLECCIÓN: selecciones
+-- Inserción de documentos JSON
+-- =============================================================================
+
+use("mundial2026")
+
+db.selecciones.insertMany([
+    {
+        nombre: "Colombia",
+        colorCamiseta: "Amarillo",
+        capital: "Bogotá",
+        poblacion: 60000000
+    },
+    {
+        nombre: "Inglaterra",
+        capital: "Londres",
+        mundialesGanados: 1
+    },
+    {
+        nombre: "Republica del Congo",
+        edadPromedio: 15,
+        continente: "Africa"
+    }
+])
+
+-- =============================================================================
+-- COLECCIÓN: estadios
+-- =============================================================================
+
+db.estadios.insertMany([
+    {
+        ciudad: "Atlanta",
+        nombreDeEstadio: "Mercedes-Benz Stadium"
+    },
+    {
+        ciudad: "Boston",
+        nombreDeEstadio: "Gillette Stadium"
+    },
+    {
+        ciudad: "Houston",
+        nombreDeEstadio: "NRG Stadium"
+    },
+    {
+        ciudad: "Miami",
+        nombreDeEstadio: "Hard Rock Stadium"
+    },
+    {
+        ciudad: "Filadelfia",
+        nombreDeEstadio: "Lincoln Financial Field"
+    }
+])
+
+-- =============================================================================
+-- COLECCIÓN: favoritos
+-- Equipos favoritos al Mundial
+-- =============================================================================
+
+db.favoritos.insertMany([
+    {
+        equipo: "España",
+        copasGanadas: 1
+    },
+    {
+        equipo: "Francia",
+        copasGanadas: 2
+    },
+    {
+        equipo: "Inglaterra",
+        copasGanadas: 1
+    },
+    {
+        equipo: "Brasil",
+        copasGanadas: 5
+    }
+])
+
+-- =============================================================================
+-- COLECCIÓN: jugadores
+-- =============================================================================
+
+db.jugadores.insertMany([
+    {
+        nombre: "Kylian Mbappé",
+        pais: "Francia",
+        posicion: "Delantero",
+        edad: 27
+    },
+    {
+        nombre: "Pedri",
+        pais: "España",
+        posicion: "Mediocampista",
+        edad: 23
+    },
+    {
+        nombre: "Jude Bellingham",
+        pais: "Inglaterra",
+        posicion: "Mediocampista",
+        edad: 22
+    },
+    {
+        nombre: "Vinicius Jr",
+        pais: "Brasil",
+        posicion: "Delantero",
+        edad: 25
+    }
+])
+
+-- =============================================================================
+-- COLECCIÓN: entrenadores
+-- =============================================================================
+
+db.entrenadores.insertMany([
+    {
+        nombre: "Néstor Lorenzo",
+        pais: "Colombia",
+        edad: 58,
+        estilo: "Ofensivo"
+    },
+    {
+        nombre: "Didier Deschamps",
+        pais: "Francia",
+        edad: 57,
+        estilo: "Equilibrado"
+    },
+    {
+        nombre: "Luis de la Fuente",
+        pais: "España",
+        edad: 64,
+        estilo: "Posesión"
+    },
+    {
+        nombre: "Gareth Southgate",
+        pais: "Inglaterra",
+        edad: 55,
+        estilo: "Defensivo"
+    },
+    {
+        nombre: "Dorival Júnior",
+        pais: "Brasil",
+        edad: 63,
+        estilo: "Ofensivo"
+    }
+])
+
+-- =============================================================================
+-- UPDATEONE
+-- Actualiza el primer documento que cumpla la condición
+-- =============================================================================
+
+db.favoritos.updateOne(
+    { equipo: "España" },
+    {
+        $set: {
+            copasGanadas: 1
+        }
+    }
+)
+
+-- =============================================================================
+-- UPDATEMANY
+-- Actualiza todos los documentos que cumplan el filtro
+-- =============================================================================
+
+db.favoritos.updateMany(
+    { equipo: "España" },
+    {
+        $set: {
+            copasGanadas: 1
+        }
+    }
+)
+
+-- =============================================================================
+-- CONSULTAS SOBRE SAMPLE_AIRBNB
+-- =============================================================================
+
+use("sample_airbnb")
+
+-- =============================================================================
+-- CONSULTA 1
+-- Buscar alojamientos en New York con reseñas antiguas
+-- Uso de operador $lte
+-- =============================================================================
+
+db.listingsAndReviews.find(
+    {
+        "address.market": "New York",
+
+        first_review: {
+            $lte: ISODate("2026-04-29T00:00:00Z")
+        }
+    }
+)
+
+-- =============================================================================
+-- CONSULTA 2
+-- Apartamentos que tengan Cable TV y Wifi
+-- Uso de operadores sobre arreglos
+-- =============================================================================
+
+db.listingsAndReviews.find(
+    {
+        property_type: "Apartment",
+
+        $and: [
+            {
+                amenities: {
+                    $elemMatch: {
+                        $eq: "Cable TV"
+                    }
+                }
+            },
+            {
+                amenities: {
+                    $elemMatch: {
+                        $eq: "Wifi"
+                    }
+                }
+            }
+        ]
+    }
+)
+
+-- =============================================================================
+-- CONSULTA 3
+-- Mostrar país y número de camas
+-- Uso de proyecciones
+-- =============================================================================
+
+db.listingsAndReviews.find(
+    {
+        property_type: "Apartment",
+
+        $and: [
+            {
+                amenities: {
+                    $elemMatch: {
+                        $eq: "Cable TV"
+                    }
+                }
+            },
+            {
+                amenities: {
+                    $elemMatch: {
+                        $eq: "Wifi"
+                    }
+                }
+            }
+        ]
+    },
+
+    {
+        "address.country": 1,
+        beds: 1
+    }
+)
+
+-- =============================================================================
+-- CONSULTA 4
+-- Suma total de precios de apartamentos
+-- Uso de aggregate, match y group
+-- =============================================================================
+
+db.listingsAndReviews.aggregate([
+    {
+        $match: {
+            property_type: "Apartment",
+
+            "address.market": "Porto",
+
+            amenities: {
+                $all: ["Cable TV", "Wifi"]
+            }
+        }
+    },
+
+    {
+        $group: {
+            _id: "$address.country",
+
+            beds: {
+                $first: "$beds"
+            },
+
+            total: {
+                $sum: "$price"
+            }
+        }
+    }
+])
